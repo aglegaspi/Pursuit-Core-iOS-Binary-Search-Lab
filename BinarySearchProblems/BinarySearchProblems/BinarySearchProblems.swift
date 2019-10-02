@@ -5,7 +5,30 @@ import Foundation
 // 1. Find if an element is contained within a sorted array in O(log(n)) time.  Do not use recursion.
 
 func binarySearch<T: Comparable>(arr: [T], target: T) -> Bool {
-    return false
+    var minIndex = 0
+    var maxIndex = arr.count - 1
+    print("target:\(target)")
+    print("arr: ", arr)
+    
+    while minIndex < maxIndex {
+        print("\(minIndex), \(maxIndex)")
+        let middleIndex = (minIndex + maxIndex) / 2
+        print("mid index: \(middleIndex)")
+
+        if arr[middleIndex] == target {
+            return true
+            
+        } else if target < arr[middleIndex] {
+            maxIndex = middleIndex - 1
+            
+        } else if target > arr[middleIndex] {
+            minIndex = middleIndex + 1
+        }
+        print("New minIndex: \(minIndex)")
+        print("New maxIndex: \(maxIndex)")
+    }
+
+    return arr[minIndex] == target
 }
 
 // 2. Find if an element is contained within a sorted array in O(log(n)) time.  Use recursion.
