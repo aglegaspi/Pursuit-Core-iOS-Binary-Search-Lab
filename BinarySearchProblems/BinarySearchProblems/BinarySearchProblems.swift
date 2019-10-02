@@ -7,14 +7,14 @@ import Foundation
 func binarySearch<T: Comparable>(arr: [T], target: T) -> Bool {
     var minIndex = 0
     var maxIndex = arr.count - 1
-    print("target:\(target)")
-    print("arr: ", arr)
+    //print("target:\(target)")
+    //print("arr: ", arr)
     
     while minIndex < maxIndex {
-        print("\(minIndex), \(maxIndex)")
+        //print("\(minIndex), \(maxIndex)")
         let middleIndex = (minIndex + maxIndex) / 2
-        print("mid index: \(middleIndex)")
-
+        //print("mid index: \(middleIndex)")
+        
         if arr[middleIndex] == target {
             return true
             
@@ -24,18 +24,52 @@ func binarySearch<T: Comparable>(arr: [T], target: T) -> Bool {
         } else if target > arr[middleIndex] {
             minIndex = middleIndex + 1
         }
-        print("New minIndex: \(minIndex)")
-        print("New maxIndex: \(maxIndex)")
+        //print("New minIndex: \(minIndex)")
+        //print("New maxIndex: \(maxIndex)")
     }
-
+    
     return arr[minIndex] == target
 }
+
+
+
+
+
+
+
 
 // 2. Find if an element is contained within a sorted array in O(log(n)) time.  Use recursion.
 
 func recursiveBinarySearch<T: Comparable>(arr: [T], target: T) -> Bool {
+    
+    if arr.count == 0 {
+        return false
+    }
+    
+    let minIndex = 0
+    let maxIndex = arr.count - 1
+    let midIndex = maxIndex / 2
+    
+    if target < arr[minIndex] || target > arr[maxIndex]{
+        return false
+    }
+
+    if target == arr[midIndex] {
+        return true
+        
+    } else if target < arr[midIndex] {
+        let slicedArray = Array(arr[minIndex...midIndex - 1])
+        return binarySearch(arr: slicedArray, target: target)
+        
+    } else if target > arr[midIndex] {
+       let slicedArray = Array(arr[midIndex + 1...maxIndex])
+       return binarySearch(arr: slicedArray, target: target)
+    }
+        
     return false
 }
+
+
 
 // https://www.interviewbit.com/problems/matrix-search/
 
@@ -45,6 +79,7 @@ func recursiveBinarySearch<T: Comparable>(arr: [T], target: T) -> Bool {
 // The first integer of each row is greater than or equal to the last integer of the previous row.
 
 func contains(value: Int, in arr: [[Int]]) -> Bool {
+    
     return false
 }
 
